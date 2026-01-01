@@ -1,18 +1,20 @@
 import { useState } from "react";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ email, password });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={submit} className="form">
+      <Input
         type="email"
         placeholder="Email"
         value={email}
@@ -20,7 +22,7 @@ const LoginForm = () => {
         required
       />
 
-      <input
+      <Input
         type="password"
         placeholder="Password"
         value={password}
@@ -28,11 +30,10 @@ const LoginForm = () => {
         required
       />
 
-      <button type="submit">Login</button>
+      <Button type="submit">Login</Button>
 
-      <p>
-        Don’t have an account?{" "}
-        <Link to="/register/select-role">Create one</Link>
+      <p className="text-center">
+        No account? <Link to="/register/select-role">Create one</Link>
       </p>
     </form>
   );

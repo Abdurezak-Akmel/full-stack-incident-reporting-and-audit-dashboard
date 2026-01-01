@@ -1,19 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import RoleSelector from "../../components/auth/RoleSelector";
 
 const SelectRolePage = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="container">
-      <h2>Create an Account</h2>
-
-      <button onClick={() => navigate("/register?role=EMPLOYEE")}>
-        Employee Account
-      </button>
-
-      <button onClick={() => navigate("/register?role=ADMIN")}>
-        Admin Account
-      </button>
+      <h2>Create Account</h2>
+      <RoleSelector />
     </div>
   );
 };
