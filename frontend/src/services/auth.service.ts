@@ -7,6 +7,9 @@ import type {
 
 const API_URL = "http://localhost:5000/api/auth";
 
+/**
+ * Common response handler
+ */
 const handleResponse = async (res: Response) => {
   const data = await res.json();
   if (!res.ok) {
@@ -15,6 +18,10 @@ const handleResponse = async (res: Response) => {
   return data;
 };
 
+/**
+ * Register user (Employee or Admin)
+ * Backend sends OTP email after this
+ */
 export const registerUser = async (
   data: RegisterRequest
 ): Promise<RegisterResponse> => {
@@ -27,6 +34,10 @@ export const registerUser = async (
   return handleResponse(res);
 };
 
+/**
+ * Login user
+ * Backend sends OTP email after successful password check
+ */
 export const loginUser = async (
   data: LoginRequest
 ): Promise<LoginResponse> => {
@@ -39,32 +50,18 @@ export const loginUser = async (
   return handleResponse(res);
 };
 
+/**
+ * Verify OTP (used for both register & login)
+ */
+export const verifyOtp = async (data: {
+  email: string;
+  otp: string;
+}) => {
+  const res = await fetch(`${API_URL}/verify-otp`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
 
-// const API_URL = "http://localhost:5000/api/auth"; // backend URL
-
-// export const registerUser = async (data: {
-//   email: string;
-//   password: string;
-//   role: "EMPLOYEE" | "ADMIN";
-// }) => {
-//   const res = await fetch(`${API_URL}/register`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(data),
-//   });
-
-//   return res.json();
-// };
-
-// export const loginUser = async (data: {
-//   email: string;
-//   password: string;
-// }) => {
-//   const res = await fetch(`${API_URL}/login`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(data),
-//   });
-
-//   return res.json();
-// };
+  return handleResponse(res);
+};
