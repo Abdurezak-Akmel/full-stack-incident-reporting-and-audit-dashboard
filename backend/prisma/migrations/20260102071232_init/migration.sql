@@ -4,7 +4,6 @@ CREATE TYPE "Role" AS ENUM ('EMPLOYEE', 'ADMIN');
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "fullName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" "Role" NOT NULL,
